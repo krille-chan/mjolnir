@@ -115,7 +115,8 @@ const defaultConfig: IConfig = {
     },
     dataPath: "/data/storage",
     acceptInvitesFromGroup: '+example:example.org',
-    autojoinOnlyIfManager: false,
+    // no default because groups have been deprecated.
+    autojoinOnlyIfManager: true,
     recordIgnoredInvites: false,
     managementRoom: "!noop:example.org",
     verboseLogging: false,
@@ -168,5 +169,9 @@ const defaultConfig: IConfig = {
     },
 };
 
-const finalConfig = <IConfig>Object.assign({}, defaultConfig, config);
+export function setDefaults(config: any): IConfig {
+    return <IConfig>Object.assign({}, JSON.parse(JSON.stringify(defaultConfig)), config);
+}
+
+const finalConfig = setDefaults(config);
 export default finalConfig;

@@ -138,6 +138,7 @@ export class Mjolnir {
                 const managers = await client.getJoinedRoomMembers(mjolnir.managementRoomId);
                 if (!managers.includes(membershipEvent.sender)) return reportInvite(); // ignore invite
             } else {
+                // The appservice crashes here because the group bullshit doesn't exist anymore.
                 const groupMembers = await client.unstableApis.getGroupUsers(options.acceptInvitesFromGroup);
                 const userIds = groupMembers.map(m => m.user_id);
                 if (!userIds.includes(membershipEvent.sender)) return reportInvite(); // ignore invite
